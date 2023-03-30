@@ -1,0 +1,1 @@
+export const api = "https://phlottodev1.azurewebsites.net/index"
