@@ -1,7 +1,7 @@
 .main {
   display: inline-block;
-  margin: 50px;
-  background-color: #a2d2ff;
+  margin: 20px;
+  background-color: aliceblue;
   font-size: 20px;
 }
 
@@ -16,7 +16,7 @@
 }
 .titleDiv .left {
   width: 350px;
-  min-height: 83px;
+  min-height: 103px;
   background-color: #d4a373;
   display: flex;
   justify-content: space-between;
@@ -64,6 +64,7 @@
   height: 25px;
   border-radius: 25px;
   background-color: red;
+  line-height: 25px;
   text-align: center;
   margin: 0 5px;
 }
@@ -73,8 +74,9 @@
   height: 25px;
   border-radius: 25px;
   text-align: center;
+  line-height: 25px;
   z-index: 1;
-  margin: 10px 0;
+  margin: 10px 1px;
 }
 
 .unLuckyNumber {
@@ -91,8 +93,7 @@
   width: 25px;
   height: 25px;
   text-align: center;
-  z-index: 1;
-  padding: 10px 0;
+  padding: 10px 1px;
 }
 
 .allbtnBox {
@@ -137,5 +138,25 @@
 }
 
 .blue {
+  background-color: blue;
+}
+
+.color-set-red {
+  background-color: red;
+}
+
+.color-set-green {
+  background-color: green;
+}
+
+.color-set-yellow {
+  background-color: yellow;
+}
+
+.color-set-purple {
+  background-color: purple;
+}
+
+.color-set-blue {
   background-color: blue;
 }/*# sourceMappingURL=all.css.map */
