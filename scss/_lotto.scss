@@ -1,0 +1,260 @@
+.main {
+  background-color: aliceblue;
+  font-size: 16px;
+  width: 1300px;
+  overflow: auto;
+  margin: auto;
+  position: relative;
+
+  @include PC_breakpoint {
+    width: 95%;
+  }
+}
+
+.box {
+  display: flex;
+}
+
+.statisticsBox {
+  display: flex;
+}
+
+.titleDiv {
+  display: inline-flex;
+  box-sizing: border-box;
+
+  .left {
+    min-height: 77px;
+    background-color: #d4a373;
+    display: flex;
+  }
+  .rightTitleBoxContent {
+    border-left: 1px solid black;
+    background-color: wheat;
+  }
+  .rightTitle {
+    padding: 5px 0;
+    text-align: center;
+    border-bottom: 1px solid black;
+    font-weight: 600;
+  }
+  .rightContent {
+    display: flex;
+  }
+  .titleNo {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .titleDate {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .titleNumber {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.statisticsTitleDiv {
+  width: 100%;
+  display: inline-flex;
+  box-sizing: border-box;
+
+  .left {
+    min-height: 77px;
+    background-color: #d4a373;
+    display: flex;
+  }
+  .toDataTotalArea {
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .rightTitleBoxContent {
+    border-left: 1px solid black;
+    background-color: wheat;
+  }
+  .rightTitle {
+    padding: 5px 0;
+    text-align: center;
+    border-bottom: 1px solid black;
+    font-weight: 600;
+  }
+  .rightContent {
+    display: flex;
+  }
+}
+
+.leftBox {
+  display: flex;
+  background-color: #d4a373;
+  min-height: 45px;
+
+  .toDataTotalArea {
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.toSortArea {
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toDateArea {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toLuckyArea {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightBoxContent {
+  display: flex;
+  border-left: 1px solid black;
+}
+
+.luckyNumber {
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  background-color: red;
+  line-height: 25px;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.bodyLuckyNumber {
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  text-align: center;
+  line-height: 25px;
+  z-index: 1;
+  margin: 10px 1px;
+}
+
+.unLuckyNumber {
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  line-height: 25px;
+  margin: 0 5px;
+}
+
+.number-area {
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  padding: 10px 1px;
+  line-height: 25px;
+}
+
+.allbtnBox {
+  display: flex;
+}
+
+.allbtnNumberBox {
+  display: flex;
+}
+
+.btn {
+  background: white;
+  border: none;
+  height: 36px;
+  line-height: 36px;
+  width: 80px;
+  text-align: center;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.active {
+  background: black;
+  color: white;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.color-set-red {
+  background-color: red;
+}
+
+.color-set-green {
+  background-color: green;
+}
+
+.color-set-yellow {
+  background-color: yellow;
+}
+
+.color-set-purple {
+  background-color: purple;
+}
+
+.color-set-blue {
+  background-color: blue;
+}
+
+.color-set-backGround-red {
+  background-color: #fcf8f3;
+}
+
+.color-set-backGround-green {
+  background-color: #c4f1be;
+}
+
+.color-set-backGround-yellow {
+  background-color: #caf2c7;
+}
+
+.color-set-backGround-purple {
+  background-color: #b2dbad;
+}
+
+.color-set-backGround-blue {
+  background-color: #93B58F;
+}
+
+.color-set-title-red {
+  background-color: white;
+}
