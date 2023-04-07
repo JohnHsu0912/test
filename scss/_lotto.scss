@@ -5,6 +5,10 @@
   overflow: auto;
   margin: auto;
   position: relative;
+
+  @include PC_breakpoint {
+    width: 95%;
+  }
 }
 
 .box {
@@ -37,19 +41,19 @@
   .rightContent {
     display: flex;
   }
-  .titleNo{
+  .titleNo {
     width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .titleDate{
+  .titleDate {
     width: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .titleNumber{
+  .titleNumber {
     width: 200px;
     display: flex;
     justify-content: center;
@@ -67,7 +71,7 @@
     background-color: #d4a373;
     display: flex;
   }
-  .toDataTotalArea{
+  .toDataTotalArea {
     width: 350px;
     display: flex;
     justify-content: center;
@@ -93,7 +97,7 @@
   background-color: #d4a373;
   min-height: 45px;
 
-  .toDataTotalArea{
+  .toDataTotalArea {
     width: 350px;
     display: flex;
     justify-content: center;
@@ -115,14 +119,12 @@
   align-items: center;
 }
 
-.toLuckyArea{
+.toLuckyArea {
   width: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-
 
 .rightBoxContent {
   display: flex;
@@ -231,4 +233,28 @@
 
 .color-set-blue {
   background-color: blue;
+}
+
+.color-set-backGround-red {
+  background-color: #fcf8f3;
+}
+
+.color-set-backGround-green {
+  background-color: #c4f1be;
+}
+
+.color-set-backGround-yellow {
+  background-color: #caf2c7;
+}
+
+.color-set-backGround-purple {
+  background-color: #b2dbad;
+}
+
+.color-set-backGround-blue {
+  background-color: #93B58F;
+}
+
+.color-set-title-red {
+  background-color: white;
 }

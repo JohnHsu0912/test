@@ -6,6 +6,11 @@
   margin: auto;
   position: relative;
 }
+@media (max-width: 1350px) {
+  .main {
+    width: 95%;
+  }
+}
 
 .box {
   display: flex;
@@ -226,4 +231,33 @@
 
 .color-set-blue {
   background-color: blue;
+}
+
+.color-set-backGround-red {
+  background-color: #fcf8f3;
+}
+
+.color-set-backGround-green {
+  background-color: #c4f1be;
+}
+
+.color-set-backGround-yellow {
+  background-color: #caf2c7;
+}
+
+.color-set-backGround-purple {
+  background-color: #b2dbad;
+}
+
+.color-set-backGround-blue {
+  background-color: #93B58F;
+}
+
+.color-set-title-red {
+  background-color: white;
+}
+
+.acticle {
+  font-size: 30px;
+  margin: 20px;
 }/*# sourceMappingURL=all.css.map */

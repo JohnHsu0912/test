@@ -183,6 +183,7 @@ let mainRange = [];
 //球跟線的顏色
 let lineColor = ["red", "green", "yellow", "purple", "blue"];
 
+
 //先抓取API然後塞進 vanillaData
 async function getApi() {
   try {
@@ -352,7 +353,7 @@ function ballsTotal(data) {
   const result = total.map((num, luckyIndex) => {
     // 先判斷是否要顯示這顆球
     if (balls[luckyIndex] === 1) {
-      const down = data[num].map((content, numIndex) => {
+      const firstData = data[num].map((content, numIndex) => {
         //再處理是否為中獎號碼
         if (Number(win[luckyIndex]) === numIndex + 1) {
           ballsBackGroundState[luckyIndex][numIndex] = 1;
@@ -367,7 +368,9 @@ function ballsTotal(data) {
           `color-set-${lineColor[luckyIndex]}`
         }">${isMissMap ? content : ""}</div>`;
       });
-      return `<div class="rightBoxContent">${down.join("")}</div>`;
+      return `<div class="rightBoxContent color-set-backGround-${
+        lineColor[luckyIndex]
+      }">${firstData.join("")}</div>`;
     }
   });
   return result.join("");
