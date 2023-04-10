@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
 .main {
   background-color: aliceblue;
   font-size: 16px;
@@ -255,6 +256,85 @@
 
 .color-set-title-red {
   background-color: white;
+}
+
+.historyMain {
+  background-color: aliceblue;
+  font-size: 16px;
+  width: 1000px;
+  overflow: auto;
+  margin: auto;
+  position: relative;
+}
+@media (max-width: 1350px) {
+  .historyMain {
+    width: 95%;
+  }
+}
+
+.historyBox {
+  width: 100%;
+  display: flex;
+  height: 50px;
+  border-bottom: 1px black solid;
+  background-color: azure;
+}
+
+.historyTitle {
+  width: 100%;
+  display: flex;
+  height: 77px;
+}
+.historyTitle .rightTitleBoxContent {
+  border-left: 1px solid black;
+}
+.historyTitle .rightTitle {
+  padding: 5px 0;
+  text-align: center;
+  border-bottom: 1px solid black;
+  font-weight: 600;
+}
+.historyTitle .rightContent {
+  display: flex;
+}
+.historyTitle .titleNo {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.historyTitle .titleDate {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.historyTitle .titleNumber {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toHistorySortArea {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toHistoryDateArea {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toHistoryLuckyArea {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .acticle {
