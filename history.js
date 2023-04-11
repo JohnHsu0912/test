@@ -40,15 +40,6 @@ let ballsBackGroundState = [];
 //抓取API資料塞進去
 let vanillaData = [];
 
-//是否顯示遺漏表的開關
-let isMissMap = true;
-
-//是否顯示背景標註的開關
-let isBackGroundNumber = false;
-
-//是否顯示遺漏表的開關
-let isShowLine = true;
-
 //所有顯示的期數列表 固定值
 let period = [10, 30, 50, 100];
 
@@ -61,8 +52,6 @@ let balls = [];
 //用來設置總共球數區間
 let mainRange = [];
 
-//球跟線的顏色
-let lineColor = ["red", "green", "yellow", "purple", "blue"];
 
 //先抓取API然後塞進 vanillaData
 async function getApi() {
@@ -112,12 +101,6 @@ function clearAllTitle() {
   titleDiv?.remove();
 }
 
-//用來清掉所有數據標題的表
-function clearAllStatisticsTitle() {
-  let statisticsTitleDiv = document.querySelector(".statisticsTitleDiv");
-  statisticsTitleDiv?.remove();
-}
-
 //用來清掉所有開獎資料的邏輯
 function clearAllData() {
   let historyBox = document.querySelectorAll(".historyBox");
@@ -126,26 +109,7 @@ function clearAllData() {
   }
 }
 
-//用來清掉所有數據統計資料的邏輯
-function clearAllStatistics() {
-  let statisticsBox = document.querySelectorAll(".statisticsBox");
-  //固定只有4筆紀錄
-  for (let x = 0; x <= 4; x++) {
-    statisticsBox[x]?.remove();
-  }
-}
 
-//用來清掉所有的線
-function clearLine() {
-  let canvas = document.querySelector("canvas");
-  canvas?.remove();
-}
-
-//清除所有的資料
-function clearAll() {
-  clearAllData(); //清除所有開獎資料
-  clearAllTitle(); //清除所有標題
-}
 
 //用來顯示標題第幾球的邏輯
 function mainTitle() {
