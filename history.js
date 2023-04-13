@@ -1,4 +1,4 @@
-import { api } from "./api.js";
+import { API_Calabarzon_6D } from "./api.js";
 
 //統計資料的假格式
 let statistics = [
@@ -44,7 +44,7 @@ let vanillaData = [];
 let period = [10, 30, 50, 100];
 
 //當前期數
-let nowPeriod = 30;
+let nowPeriod = 10;
 
 //用來表示第幾球
 let balls = [];
@@ -56,7 +56,7 @@ let mainRange = [];
 //先抓取API然後塞進 vanillaData
 async function getApi() {
   try {
-    const res = await fetch(api);
+    const res = await fetch(API_Calabarzon_6D);
     const data = await res.json();
     let ball = await data[0][0].keys;
     vanillaData = data[0].reverse();
@@ -95,11 +95,6 @@ function setVanillaBackGroundState(ball) {
   }
 }
 
-//用來清掉所有標題的邏輯
-function clearAllTitle() {
-  let titleDiv = document.querySelector(".titleDiv");
-  titleDiv?.remove();
-}
 
 //用來清掉所有開獎資料的邏輯
 function clearAllData() {
@@ -108,7 +103,6 @@ function clearAllData() {
     historyBox[x]?.remove();
   }
 }
-
 
 
 //用來顯示標題第幾球的邏輯
@@ -126,9 +120,9 @@ function mainTitle() {
 //用來顯示中獎號碼區域
 function ballsLotteryAera(win) {
   const ballsWin = win.map((num, i) => {
-    return `<div class=${
+    return `<span class=${
       balls[i] === 1 ? "luckyNumber" : "unLuckyNumber"
-    }>${num}</div>`;
+    }>${num}</span>`;
   });
   return `<div class="toHistoryLuckyArea">${ballsWin.join("")}</div>`;
 }

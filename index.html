@@ -8,18 +8,35 @@
     <title>test</title>
   </head>
   <body>
-    <div class="allbtnBox">
-      <div class="btn" id="btn">10 期</div>
-      <div id="btn" class="btn active">30 期</div>
-      <div id="btn" class="btn">50 期</div>
+    <div class="load">讀取中...</div>
+    <div class="allPeriodbtnBox">
+      <button id="btn" class="periodBtn">10 期</button>
+      <button id="btn" class="periodBtn active">30 期</button>
+      <button id="btn" class="periodBtn">50 期</button>
     </div>
-    <div class="allbtnBox">
-      <div id="showMissMap" class="btn active">遺漏數表</div>
-      <div id="showLine" class="btn active">折線圖</div>
-      <div id="showBackground" class="btn">背景標註</div>
+    <div class="optionContent">
+      <div class="allbtnNumberBox">選擇展示 :</div>
+      <div class="allbtnBox">
+        分析項 :
+        <div class="analyzeBtn" id="missBtn">
+          <button id="showMissMap" class="btn active"></button>
+          <img class="check" id="check" src="./check.svg"/>
+          遺漏數字
+        </div>
+        <div class="analyzeBtn" id="lineBtn">
+          <button id="showLine" class="btn active"></button>
+          <img class="check" id="check" src="./check.svg"/>
+          折線圖
+        </div>
+        <div class="analyzeBtn" id="backGroundBtn">
+          <button id="showBackground" class="btn"></button>
+          <img class="check" id="check" src="./check.svg"/>
+          背景標註
+        </div>
+      </div>
     </div>
-    <div class="allbtnNumberBox"></div>
     <a class="btn" href="./history.html">歷史獎期</a>
+    <a class="btn" href="./FB.html">打字機 & FB</a>
     <div class="main"></div>
     <script type="module" src="./api.js"></script>
     <script type="module" src="./index.js"></script>

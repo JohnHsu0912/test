@@ -1,4 +1,4 @@
-import { api } from "./api.js";
+import { API_Calabarzon_6D } from "./api.js";
 
 //統計資料的假格式
 let statistics = [
@@ -61,13 +61,22 @@ let balls = [];
 //用來設置總共球數區間
 let mainRange = [];
 
+//球數的顯示名稱陣列
+let showName = ["st", "nd", "rd", "th", "th", "th"];
+
+//球數中文的顯示名稱陣列
+let showNameChinese = ["一", "二", "三", "四", "五", "六"];
+
+//標題第幾球顏色
+let titleColor = ["one", "two", "three", "four", "five", "six"];
+
 //球跟線的顏色
-let lineColor = ["red", "green", "yellow", "purple", "blue"];
+let lineColor = ["red", "green", "yellow", "purple", "blue", "white"];
 
 //先抓取API然後塞進 vanillaData
 async function getApi() {
   try {
-    const res = await fetch(api);
+    const res = await fetch(API_Calabarzon_6D);
     const data = await res.json();
     let ball = await data[0][0].keys;
     vanillaData = data[0].reverse();
@@ -90,7 +99,7 @@ function ballsRanger(vanillaData) {
   }
   let range = vanillaData[0]?.range;
   for (let x = range[0]; x <= range[1]; x++) {
-    mainRange.push(x);
+    mainRange.push(Number(x));
   }
 }
 
@@ -151,16 +160,20 @@ function clearAll() {
 }
 
 //是否顯示遺漏數字表的邏輯
+let missBtn = document.querySelector("#missBtn");
 let showMissMap = document.querySelector("#showMissMap");
-showMissMap.addEventListener("click", function () {
+missBtn.addEventListener("click", function () {
+  let img = missBtn.getElementsByTagName("img");
   showMissMap.classList.toggle("active");
   clearAllData(); //先清除所有的表
   clearAllStatisticsTitle(); //清除所有數據標題
   clearAllStatistics();
   if (isMissMap) {
     isMissMap = false;
+    img[0].style.display = "none";
   } else {
     isMissMap = true;
+    img[0].style.display = "block";
   }
   mainDataRander(vanillaData, nowPeriod);
   statisticsTitle(); //再抓取一次統計標標題
@@ -168,16 +181,21 @@ showMissMap.addEventListener("click", function () {
 });
 
 //是否顯示背景標註的邏輯
+let backGroundBtn = document.querySelector("#backGroundBtn");
 let showBackground = document.querySelector("#showBackground");
-showBackground.addEventListener("click", function () {
+let img = backGroundBtn.getElementsByTagName("img");
+img[0].style.display = "none";
+backGroundBtn.addEventListener("click", function () {
   clearAllData(); //先清除所有的表
   clearAllStatisticsTitle(); //清除所有數據標題
   clearAllStatistics(); //清除所有數據統計的資料
   showBackground.classList.toggle("active");
   if (isBackGroundNumber) {
     isBackGroundNumber = false;
+    img[0].style.display = "none";
   } else {
     isBackGroundNumber = true;
+    img[0].style.display = "block";
   }
   mainDataRander(vanillaData, nowPeriod); //再抓取一次開獎資料
   statisticsTitle();
@@ -188,20 +206,19 @@ showBackground.addEventListener("click", function () {
 function mainTitle() {
   let result = balls.map((_, i) => {
     if (balls[i] === 1) {
-      let res = mainRange.map((num) => {
-        return `<div class="number-area">${num}</div>`;
+      let res = mainRange.map((num, x) => {
+        return `<span class="number-area">${num}</span>`;
       });
-      return `<div class="rightTitleBoxContent"><div class="rightTitle">第 ${
-        i + 1
-      } 球</div>
+      return `<div class="color-set-title-${titleColor[i]
+        }"><div class="rightTitle">第${showNameChinese[i]}位</div>
               <div class="rightContent">${res.join("")}</div></div>`;
     }
   });
   let newTitle = document.createElement("div");
   newTitle.className = "titleDiv";
   document.querySelector(".main").appendChild(newTitle);
-  let newTitleInfo = `<div class="left"><div class="titleNo">編號</div><div class="titleDate">日期</div>
-    <div class="titleNumber">號碼</div></div>${result.join("")}`;
+  let newTitleInfo = `<div class="left"><div class="titleNo">編號</div><div class="titleDate">獎期號</div>
+    <div class="titleNumber">開獎結果</div></div>${result.join("")}`;
   newTitle.innerHTML = newTitleInfo;
 }
 
@@ -212,9 +229,8 @@ function statisticsTitle() {
       let res = mainRange.map((num) => {
         return `<div class="number-area">${num}</div>`;
       });
-      return `<div class="rightTitleBoxContent"><div class="rightTitle">第 ${
-        i + 1
-      } 球</div>
+      return `<div class="color-set-title-${titleColor[i]
+        }"><div class="rightTitle">第 ${i + 1} 球</div>
         <div class="rightContent">${res.join("")}</div></div>`;
     }
   });
@@ -234,23 +250,23 @@ function ballsTotal(data) {
     // 先判斷是否要顯示這顆球
     if (balls[luckyIndex] === 1) {
       const firstData = data[num].map((content, numIndex) => {
-        //再處理是否為中獎號碼
-        if (Number(win[luckyIndex]) === numIndex + 1) {
+        //這裡要先判斷如果沒有數字0的球 陣列位置要+1 0再處理是否為中獎號碼
+        if (
+          Number(win[luckyIndex]) ===
+          (mainRange[0] !== 0 ? numIndex + 1 : numIndex)
+        ) {
           ballsBackGroundState[luckyIndex][numIndex] = 1;
-          return `<div class="${
-            lineColor[luckyIndex]
-          } bodyLuckyNumber" id="line-0${luckyIndex + 1}">${content}</div>`;
+          return `<div class="${lineColor[luckyIndex]
+            } bodyLuckyNumber" id="line-0${luckyIndex + 1}">${content}</div>`;
         }
         // 設置線的顏色與背景的顏色
-        return `<div class="number-area ${
-          ballsBackGroundState[luckyIndex][numIndex] !== 1 &&
+        return `<span class="number-area ${ballsBackGroundState[luckyIndex][numIndex] !== 1 &&
           isBackGroundNumber &&
           `color-set-${lineColor[luckyIndex]}`
-        }">${isMissMap ? content : ""}</div>`;
+          }">${isMissMap ? content : ""}</span>`;
       });
-      return `<div class="rightBoxContent color-set-backGround-${
-        lineColor[luckyIndex]
-      }">${firstData.join("")}</div>`;
+      return `<div class="rightBoxContent color-set-backGround-${lineColor[luckyIndex]
+        }">${firstData.join("")}</div>`;
     }
   });
   return result.join("");
@@ -263,9 +279,10 @@ function ballsStatistics(data) {
     // 先判斷是否要顯示這顆球
     if (balls[luckyIndex] === 1) {
       const down = data[num].map((content) => {
-        return `<div class="number-area">${content}</div>`;
+        return `<span class="number-area">${content}</span>`;
       });
-      return `<div class="rightBoxContent">${down.join("")}</div>`;
+      return `<div class="rightBoxContent color-set-backGround-${lineColor[luckyIndex]
+        }">${down.join("")}</div>`;
     }
   });
   return result.join("");
@@ -274,16 +291,15 @@ function ballsStatistics(data) {
 //用來顯示中獎號碼區域
 function ballsLotteryAera(win) {
   const ballsWin = win.map((num, i) => {
-    return `<div class=${
-      balls[i] === 1 ? "luckyNumber" : "unLuckyNumber"
-    }>${num}</div>`;
+    return `<span class=${balls[i] === 1 ? "luckyNumber" : "unLuckyNumber"
+      }>${num}</span>`;
   });
   return `<div class="toLuckyArea">${ballsWin.join("")}</div>`;
 }
 
 //用來控制顯示期數
 function btnChange() {
-  let btnAll = document.querySelectorAll("#btn");
+  let btnAll = document.querySelectorAll(".periodBtn");
   for (let i = 0; i < btnAll.length; i++) {
     btnAll[i].addEventListener("click", function () {
       // 按下該按鈕跟上一期的筆數一樣 則不做事
@@ -291,9 +307,9 @@ function btnChange() {
         return;
       }
       for (let j = 0; j < btnAll.length; j++) {
-        btnAll[j].className = "btn";
+        btnAll[j].className = "periodBtn";
       }
-      btnAll[i].className = "btn active";
+      btnAll[i].className = "periodBtn active";
       clearAllData(); //清除所有資料
       clearLine(); //清除所有線
       clearAllStatistics(); //清除所有統計資料
@@ -314,10 +330,12 @@ function btnChange() {
 function mainDataBallsBtn() {
   balls.forEach((_, i) => {
     let ballsBtn = document.createElement("div");
-    ballsBtn.className = "btn active";
-    ballsBtn.id = "showNumber";
+    ballsBtn.className = "optionBtn";
+    ballsBtn.id = "show";
     document.querySelector(".allbtnNumberBox").appendChild(ballsBtn);
-    let newBallsBtnInfo = `${i + 1} th`;
+    let newBallsBtnInfo = `<div class="btn active" id="showNumber"></div>
+    <img class="check" id="check" src="./check.svg"/>
+    <span>${i + 1}${showName[i]}</span>`;
     ballsBtn.innerHTML = newBallsBtnInfo;
   });
 }
@@ -360,16 +378,20 @@ function mainStatisticsRander(statistics) {
   });
 }
 
-//處理顯示幾球的邏輯
+//處理要顯示幾球的邏輯
 function handleBallsNumberBtn() {
+  let show = document.querySelectorAll("#show");
   let showBtn = document.querySelectorAll("#showNumber");
-  for (let i = 0; i < showBtn.length; i++) {
-    showBtn[i].addEventListener("click", function () {
+  for (let i = 0; i < show.length; i++) {
+    show[i].addEventListener("click", function () {
+      let img = show[i].getElementsByTagName("img");
       showBtn[i].classList.toggle("active");
       if (balls[i] === 1) {
         balls[i] = 0;
+        img[0].style.display = "none";
       } else {
         balls[i] = 1;
+        img[0].style.display = "block";
       }
       clearAll(); //先清除所有資料
       mainTitle(); //在抓取一次標題還有所有資料
@@ -392,7 +414,8 @@ function drawBrokenLine() {
   //抓取畫布所有的屬性
   let width = main.scrollWidth;
   let height = main.scrollHeight;
-  let panelLeft = main.scrollLeft;
+  //panelLeft設置為0才會使每次球數變更畫布位置正確
+  let panelLeft = 0;
   let panelTop = main.scrollTop;
 
   //設置canvas
@@ -401,7 +424,7 @@ function drawBrokenLine() {
   canvas.style.position = "absolute";
   main.appendChild(canvas);
   canvas.style.top = panelTop + "px";
-  canvas.style.left = panelLeft + "px";
+  canvas.style.left = 0 + "px";
 
   for (let i = 0; i < balls.length; i++) {
     let line = document.querySelectorAll(`#line-0${i + 1}`);
@@ -438,17 +461,26 @@ function drawBrokenLine() {
 
 //處理畫線按鈕
 function handleClearBtn() {
+  let lineBtn = document.querySelector("#lineBtn");
   let showLine = document.querySelector("#showLine");
-  showLine.addEventListener("click", function () {
+  let img = lineBtn.getElementsByTagName("img");
+  lineBtn.addEventListener("click", function () {
     if (isShowLine) {
       clearLine();
+      img[0].style.display = "none";
       isShowLine = false;
     } else {
       drawBrokenLine();
+      img[0].style.display = "block";
       isShowLine = true;
     }
     showLine.classList.toggle("active");
   });
+}
+
+function loadOver() {
+  let load = document.querySelector(".load");
+  load.style.display = "none";
 }
 
 window.onload = function () {
@@ -462,5 +494,6 @@ window.onload = function () {
     statisticsTitle();
     mainStatisticsRander(statistics);
     drawBrokenLine();
+    loadOver();
   });
 };
