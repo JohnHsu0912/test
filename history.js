@@ -137,9 +137,9 @@ function btnChange() {
         return;
       }
       for (let j = 0; j < btnAll.length; j++) {
-        btnAll[j].className = "btn";
+        btnAll[j].className = "periodBtn";
       }
-      btnAll[i].className = "btn active";
+      btnAll[i].className = "periodBtn active";
       clearAllData(); //清除所有資料
       nowPeriod = period[i]; //改變期數
       mainDataRander(vanillaData, nowPeriod);

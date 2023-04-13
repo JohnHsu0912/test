@@ -139,7 +139,7 @@ body {
   background-color: #C8172B;
   line-height: 28px;
   text-align: center;
-  margin: 0 5px;
+  margin: 0 3px;
   color: #FFF;
 }
 
@@ -158,11 +158,11 @@ body {
   width: 28px;
   height: 28px;
   border-radius: 28px;
-  background-color: black;
+  background-color: #777;
   color: white;
   text-align: center;
   line-height: 28px;
-  margin: 0 5px;
+  margin: 0 3px;
 }
 
 .number-area {
@@ -248,75 +248,51 @@ body {
   color: white;
 }
 
-.red {
-  background-color: red;
+.color-set-one {
+  background-color: #488D1A;
 }
 
-.green {
-  background-color: green;
+.color-set-two {
+  background-color: #18827F;
 }
 
-.yellow {
-  background-color: yellow;
+.color-set-three {
+  background-color: #FF5704;
 }
 
-.purple {
-  background-color: purple;
+.color-set-four {
+  background-color: #5D5ADE;
 }
 
-.blue {
-  background-color: blue;
+.color-set-five {
+  background-color: #A2165B;
 }
 
-.white {
-  background-color: white;
+.color-set-six {
+  background-color: #047FE8;
 }
 
-.color-set-red {
-  background-color: red;
-}
-
-.color-set-green {
-  background-color: green;
-}
-
-.color-set-yellow {
-  background-color: yellow;
-}
-
-.color-set-purple {
-  background-color: purple;
-}
-
-.color-set-blue {
-  background-color: blue;
-}
-
-.color-set-white {
-  background-color: white;
-}
-
-.color-set-backGround-red {
+.color-set-backGround-one {
   background-color: rgb(252, 248, 243);
 }
 
-.color-set-backGround-green {
+.color-set-backGround-two {
   background-color: rgb(240, 249, 252);
 }
 
-.color-set-backGround-yellow {
+.color-set-backGround-three {
   background-color: rgb(241, 252, 240);
 }
 
-.color-set-backGround-purple {
+.color-set-backGround-four {
   background-color: rgb(240, 241, 252);
 }
 
-.color-set-backGround-blue {
+.color-set-backGround-five {
   background-color: rgb(241, 252, 247);
 }
 
-.color-set-backGround-white {
+.color-set-backGround-six {
   background-color: rgb(227, 242, 253);
 }
 
@@ -452,4 +428,57 @@ body {
 
 strong {
   font-weight: 200;
+}
+
+.form {
+  margin-bottom: 25px;
+}
+
+#timerInput {
+  display: inline-block;
+  margin: auto;
+  width: 200px;
+  line-height: 30px;
+}
+
+.addBtn {
+  width: 40px;
+  line-height: 30px;
+  font-size: 24px;
+  vertical-align: top;
+}
+
+.timer {
+  background-color: #eae0d0;
+  height: 100vh;
+  color: gray;
+}
+
+.countdownClock {
+  max-width: 500px;
+  height: 300px;
+  padding-top: 50px;
+  position: absolute;
+  top: 0px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+  background-color: rgba(180, 175, 167, 0.3098039216);
+  box-shadow: 0 0 10px #7c7973;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.countdownTitle {
+  font-size: 100px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.comeBackTimeStemp {
+  font-size: 30px;
+  font-weight: 400;
 }/*# sourceMappingURL=all.css.map */

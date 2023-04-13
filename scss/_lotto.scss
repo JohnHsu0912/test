@@ -143,7 +143,7 @@
   background-color: #C8172B;
   line-height: 28px;
   text-align: center;
-  margin: 0 5px;
+  margin: 0 3px;
   color: #FFF;
 }
 
@@ -162,11 +162,11 @@
   width: 28px;
   height: 28px;
   border-radius: 28px;
-  background-color: black;
+  background-color: #777;
   color: white;
   text-align: center;
   line-height: 28px;
-  margin: 0 5px;
+  margin: 0 3px;
 }
 
 .number-area {
@@ -254,75 +254,51 @@
   color: white;
 }
 
-.red {
-  background-color: red;
+.color-set-one {
+  background-color: #488D1A;
 }
 
-.green {
-  background-color: green;
+.color-set-two {
+  background-color: #18827F;
 }
 
-.yellow {
-  background-color: yellow;
+.color-set-three {
+  background-color: #FF5704;
 }
 
-.purple {
-  background-color: purple;
+.color-set-four {
+  background-color: #5D5ADE;
 }
 
-.blue {
-  background-color: blue;
+.color-set-five {
+  background-color: #A2165B;
 }
 
-.white {
-  background-color: white;
+.color-set-six {
+  background-color: #047FE8;
 }
 
-.color-set-red {
-  background-color: red;
-}
-
-.color-set-green {
-  background-color: green;
-}
-
-.color-set-yellow {
-  background-color: yellow;
-}
-
-.color-set-purple {
-  background-color: purple;
-}
-
-.color-set-blue {
-  background-color: blue;
-}
-
-.color-set-white {
-  background-color: white;
-}
-
-.color-set-backGround-red {
+.color-set-backGround-one {
   background-color: rgb(252, 248, 243);
 }
 
-.color-set-backGround-green {
+.color-set-backGround-two {
   background-color: rgb(240, 249, 252);
 }
 
-.color-set-backGround-yellow {
+.color-set-backGround-three {
   background-color: rgb(241, 252, 240);
 }
 
-.color-set-backGround-purple {
+.color-set-backGround-four {
   background-color: rgb(240, 241, 252);
 }
 
-.color-set-backGround-blue {
+.color-set-backGround-five {
   background-color: rgb(241, 252, 247);
 }
 
-.color-set-backGround-white {
+.color-set-backGround-six {
   background-color: rgb(227, 242, 253);
 }
 

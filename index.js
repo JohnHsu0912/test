@@ -70,8 +70,15 @@ let showNameChinese = ["一", "二", "三", "四", "五", "六"];
 //標題第幾球顏色
 let titleColor = ["one", "two", "three", "four", "five", "six"];
 
-//球跟線的顏色
-let lineColor = ["red", "green", "yellow", "purple", "blue", "white"];
+//線的顏色
+let lineColor = [
+  "#488D1A",
+  "#18827F",
+  "#FF5704",
+  "#5D5ADE",
+  "#A2165B",
+  "#047FE8",
+];
 
 //先抓取API然後塞進 vanillaData
 async function getApi() {
@@ -209,8 +216,9 @@ function mainTitle() {
       let res = mainRange.map((num, x) => {
         return `<span class="number-area">${num}</span>`;
       });
-      return `<div class="color-set-title-${titleColor[i]
-        }"><div class="rightTitle">第${showNameChinese[i]}位</div>
+      return `<div class="color-set-title-${
+        titleColor[i]
+      }"><div class="rightTitle">第${showNameChinese[i]}球</div>
               <div class="rightContent">${res.join("")}</div></div>`;
     }
   });
@@ -229,8 +237,9 @@ function statisticsTitle() {
       let res = mainRange.map((num) => {
         return `<div class="number-area">${num}</div>`;
       });
-      return `<div class="color-set-title-${titleColor[i]
-        }"><div class="rightTitle">第 ${i + 1} 球</div>
+      return `<div class="color-set-title-${
+        titleColor[i]
+      }"><div class="rightTitle">第${showNameChinese[i]}球</div>
         <div class="rightContent">${res.join("")}</div></div>`;
     }
   });
@@ -256,17 +265,20 @@ function ballsTotal(data) {
           (mainRange[0] !== 0 ? numIndex + 1 : numIndex)
         ) {
           ballsBackGroundState[luckyIndex][numIndex] = 1;
-          return `<div class="${lineColor[luckyIndex]
-            } bodyLuckyNumber" id="line-0${luckyIndex + 1}">${content}</div>`;
+          return `<div class="color-set-${
+            titleColor[luckyIndex]
+          } bodyLuckyNumber" id="line-0${luckyIndex + 1}">${content}</div>`;
         }
         // 設置線的顏色與背景的顏色
-        return `<span class="number-area ${ballsBackGroundState[luckyIndex][numIndex] !== 1 &&
+        return `<span class="number-area ${
+          ballsBackGroundState[luckyIndex][numIndex] !== 1 &&
           isBackGroundNumber &&
-          `color-set-${lineColor[luckyIndex]}`
-          }">${isMissMap ? content : ""}</span>`;
+          `color-set-${titleColor[luckyIndex]}`
+        }">${isMissMap ? content : ""}</span>`;
       });
-      return `<div class="rightBoxContent color-set-backGround-${lineColor[luckyIndex]
-        }">${firstData.join("")}</div>`;
+      return `<div class="rightBoxContent color-set-backGround-${
+        titleColor[luckyIndex]
+      }">${firstData.join("")}</div>`;
     }
   });
   return result.join("");
@@ -281,8 +293,9 @@ function ballsStatistics(data) {
       const down = data[num].map((content) => {
         return `<span class="number-area">${content}</span>`;
       });
-      return `<div class="rightBoxContent color-set-backGround-${lineColor[luckyIndex]
-        }">${down.join("")}</div>`;
+      return `<div class="rightBoxContent color-set-backGround-${
+        titleColor[luckyIndex]
+      }">${down.join("")}</div>`;
     }
   });
   return result.join("");
@@ -291,8 +304,9 @@ function ballsStatistics(data) {
 //用來顯示中獎號碼區域
 function ballsLotteryAera(win) {
   const ballsWin = win.map((num, i) => {
-    return `<span class=${balls[i] === 1 ? "luckyNumber" : "unLuckyNumber"
-      }>${num}</span>`;
+    return `<span class=${
+      balls[i] === 1 ? "luckyNumber" : "unLuckyNumber"
+    }>${num}</span>`;
   });
   return `<div class="toLuckyArea">${ballsWin.join("")}</div>`;
 }
