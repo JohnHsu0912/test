@@ -58,7 +58,7 @@ body {
   align-items: center;
 }
 .titleDiv .titleDate {
-  width: 100px;
+  width: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,7 +81,7 @@ body {
   display: flex;
 }
 .statisticsTitleDiv .toDataTotalArea {
-  width: 390px;
+  width: 440px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,7 +101,7 @@ body {
   min-height: 45px;
 }
 .leftBox .toDataTotalArea {
-  width: 390px;
+  width: 440px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,7 +115,7 @@ body {
 }
 
 .toDateArea {
-  width: 100px;
+  width: 150px;
   display: flex;
   justify-content: center;
   align-items: center;

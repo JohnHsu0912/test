@@ -47,3 +47,6 @@ export const API_Davao_6D = `${api}6DLottoInfos/REGXI6DG`;
 export const API_Ilocos_6D = `${api}6DLottoInfos/REGI6DG`;
 
 export const API_Lotto_6D = `${api}6DLottoInfos/TL6DG`;
+
+
+export const API_FULL_Calabarzon_6D = `${api}2DLottoInfosFull/NCR2DG`;

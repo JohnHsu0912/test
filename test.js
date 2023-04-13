@@ -1,59 +1,35 @@
 //原本放在index.js裡面 原本的程式碼   目前最新的都用GPT做優化
-import { API_Mindanao_2D } from "./api.js";
+import { API_Calabarzon_6D } from "./api.js";
 
 //統計資料的假格式
 let statistics = [
   {
-    keys: ["first", "second", "three"],
-    name: "occurrences",
-    first: [
-      5, 3, 3, 4, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 0, 3, 1, 3, 1, 0, 2, 2,
-      2, 2, 1, 0, 2, 0,
-    ],
-    second: [
-      0, 1, 0, 3, 2, 0, 1, 1, 3, 4, 1, 1, 2, 2, 2, 1, 1, 5, 2, 0, 1, 0, 1, 0, 1,
-      1, 1, 4, 1, 4, 4,
-    ],
-    three: [
-      0, 1, 0, 3, 2, 0, 1, 1, 3, 4, 1, 1, 2, 2, 2, 1, 1, 5, 2, 0, 1, 0, 1, 0, 1,
-      1, 1, 4, 1, 4, 4,
-    ],
+    name: "出現總次數",
+    first: ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+    keys: ["first", "second", "third"],
+    second: ["1", "1", "2", "1", "1", "1", "1", "1", "1", "1"],
+    third: ["1", "1", "1", "3", "1", "1", "1", "1", "1", "1"],
   },
   {
-    keys: ["first", "second"],
-    name: "maxOmission",
-    first: [
-      23, 22, 23, 16, 29, 28, 37, 44, 47, 26, 38, 25, 45, 46, 32, 36, 40, 50,
-      15, 48, 18, 46, 50, 24, 31, 36, 30, 27, 50, 31, 50,
-    ],
-    second: [
-      50, 40, 50, 20, 31, 50, 26, 26, 25, 16, 43, 36, 29, 21, 33, 32, 44, 25,
-      41, 50, 44, 50, 45, 50, 49, 39, 38, 22, 35, 20, 16,
-    ],
+    name: "最大遺漏值",
+    first: ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+    keys: ["first", "second", "third"],
+    second: ["1", "1", "2", "1", "1", "1", "1", "1", "1", "1"],
+    third: ["1", "1", "1", "3", "1", "1", "1", "1", "1", "1"],
   },
   {
-    keys: ["first", "second"],
-    name: "averageOmission",
-    first: [
-      5, 6, 7, 7, 10, 10, 18, 2, 23, 8, 5, 12, 22, 23, 8, 18, 4, 0, 10, 24, 8,
-      1, 0, 13, 5, 12, 13, 11, 0, 16, 0,
-    ],
-    second: [
-      0, 4, 0, 10, 5, 0, 11, 13, 5, 7, 3, 18, 15, 9, 11, 16, 2, 7, 13, 0, 22, 0,
-      2, 0, 24, 19, 5, 8, 17, 5, 7,
-    ],
+    name: "平均遺漏值",
+    first: ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+    keys: ["first", "second", "third"],
+    second: ["1", "1", "2", "1", "1", "1", "1", "1", "1", "1"],
+    third: ["1", "1", "1", "3", "1", "1", "1", "1", "1", "1"],
   },
   {
-    keys: ["first", "second"],
-    name: "maxContinuous",
-    first: [
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1,
-      1, 1, 1, 0, 1, 0,
-    ],
-    second: [
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1,
-      1, 1, 1, 0, 1, 0,
-    ],
+    name: "最大連出值",
+    first: ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+    keys: ["first", "second", "third"],
+    second: ["1", "1", "2", "1", "1", "1", "1", "1", "1", "1"],
+    third: ["1", "1", "1", "3", "1", "1", "1", "1", "1", "1"],
   },
 ];
 
@@ -95,9 +71,6 @@ let showNameChinese = ["一", "二", "三", "四", "五", "六"];
 //標題第幾球顏色
 let titleColor = ["one", "two", "three", "four", "five", "six"];
 
-//用來表示數據統計的標題
-let statisticsName = ["出現總次數", "最大遺漏值", "平均遺漏值", "最大連出值"];
-
 //線的顏色
 let lineColor = [
   "#488D1A",
@@ -111,13 +84,10 @@ let lineColor = [
 //先抓取API然後塞進 vanillaData
 async function getApi() {
   try {
-    const res = await fetch(API_Mindanao_2D);
+    const res = await fetch(API_Calabarzon_6D);
     const data = await res.json();
-    // const { results } = await data[0];
-    // let ball = await results[0]?.keys;
-    // vanillaData = results?.reverse();
     let ball = await data[0][0].keys;
-    vanillaData = data[0]?.reverse();
+    vanillaData = data[0].reverse();
     console.log("先發API抓取資料");
     for (let i = 0; i < ball.length; i++) {
       balls.push(1);
@@ -132,7 +102,9 @@ async function getApi() {
 
 //處理所有球的開獎區間
 function ballsRanger(vanillaData) {
-  if (!vanillaData.length) return;
+  if (vanillaData.length === 0) {
+    return;
+  }
   let range = vanillaData[0]?.range;
   for (let x = range[0]; x <= range[1]; x++) {
     mainRange.push(Number(x));
@@ -141,12 +113,10 @@ function ballsRanger(vanillaData) {
 
 //設置 ballsBackGroundState 的初始值
 function setVanillaBackGroundState(ball) {
-  if (!ball || ball.length === 0) return;
-  let rangeLength = mainRange.length;
   ballsBackGroundState = []; //先清空
   for (let i = 0; i < ball.length; i++) {
     let arr = [];
-    for (let x = 0; x < rangeLength; x++) {
+    for (let x = 0; x < mainRange.length; x++) {
       arr.push(0);
     }
     ballsBackGroundState.push(arr);
@@ -188,17 +158,6 @@ function clearLine() {
   canvas?.remove();
 }
 
-function clearAllDataAndTitle() {
-  clearAllData();
-  clearAllStatisticsTitle();
-  clearAllStatistics();
-}
-
-function statisticsTitleAndDataRander() {
-  statisticsTitle();
-  mainStatisticsRander(statistics);
-}
-
 //清除所有的資料
 function clearAll() {
   clearAllData(); //清除所有開獎資料
@@ -211,29 +170,42 @@ function clearAll() {
 //是否顯示遺漏數字表的邏輯
 let missBtn = document.querySelector("#missBtn");
 let showMissMap = document.querySelector("#showMissMap");
-missBtn.addEventListener("click", () => {
-  const img = missBtn.getElementsByTagName("img")[0];
+missBtn.addEventListener("click", function () {
+  let img = missBtn.getElementsByTagName("img");
   showMissMap.classList.toggle("active");
-  clearAllDataAndTitle();
-  isMissMap = !isMissMap;
-  img.style.display = isMissMap ? "block" : "none";
+  clearAllData(); //先清除所有的表
+  clearAllStatisticsTitle(); //清除所有數據標題
+  clearAllStatistics();
+  if (isMissMap) {
+    isMissMap = false;
+    img[0].style.display = "none";
+  } else {
+    isMissMap = true;
+    img[0].style.display = "block";
+  }
   mainDataRander(vanillaData, nowPeriod);
-  statisticsTitleAndDataRander();
+  statisticsTitle(); //再抓取一次統計標標題
+  mainStatisticsRander(statistics); //再抓取一次統計資料
 });
 
 //是否顯示背景標註的邏輯
-const backGroundBtn = document.querySelector("#backGroundBtn");
-const showBackground = document.querySelector("#showBackground");
-const img = backGroundBtn.querySelector("img");
-img.style.display = "none";
+let backGroundBtn = document.querySelector("#backGroundBtn");
+let showBackground = document.querySelector("#showBackground");
+let img = backGroundBtn.getElementsByTagName("img");
+img[0].style.display = "none";
 backGroundBtn.addEventListener("click", function () {
-  clearAllData();
-  clearAllStatisticsTitle();
-  clearAllStatistics();
+  clearAllData(); //先清除所有的表
+  clearAllStatisticsTitle(); //清除所有數據標題
+  clearAllStatistics(); //清除所有數據統計的資料
   showBackground.classList.toggle("active");
-  isBackGroundNumber = !isBackGroundNumber;
-  img.style.display = isBackGroundNumber ? "block" : "none";
-  mainDataRander(vanillaData, nowPeriod);
+  if (isBackGroundNumber) {
+    isBackGroundNumber = false;
+    img[0].style.display = "none";
+  } else {
+    isBackGroundNumber = true;
+    img[0].style.display = "block";
+  }
+  mainDataRander(vanillaData, nowPeriod); //再抓取一次開獎資料
   statisticsTitle();
   mainStatisticsRander(statistics);
 });
@@ -342,29 +314,31 @@ function ballsLotteryAera(win) {
 
 //用來控制顯示期數
 function btnChange() {
-  const btnAll = document.querySelectorAll(".periodBtn");
-  btnAll.forEach((btn, i) => {
-    btn.addEventListener("click", function () {
+  let btnAll = document.querySelectorAll(".periodBtn");
+  for (let i = 0; i < btnAll.length; i++) {
+    btnAll[i].addEventListener("click", function () {
+      // 按下該按鈕跟上一期的筆數一樣 則不做事
       if (period[i] === nowPeriod) {
         return;
       }
-      btnAll.forEach((btn) => {
-        btn.className = "periodBtn";
-      });
-      btn.className = "periodBtn active";
+      for (let j = 0; j < btnAll.length; j++) {
+        btnAll[j].className = "periodBtn";
+      }
+      btnAll[i].className = "periodBtn active";
       clearAllData(); //清除所有資料
       clearLine(); //清除所有線
       clearAllStatistics(); //清除所有統計資料
       clearAllStatisticsTitle(); //清除所有數據標題
-      nowPeriod = period[i];
+      nowPeriod = period[i]; //改變期數
       mainDataRander(vanillaData, nowPeriod);
+      // 如果有要顯示折線圖才畫線
       if (isShowLine) {
-        drawLines();
+        drawBrokenLine();
       }
       statisticsTitle();
       mainStatisticsRander(statistics);
     });
-  });
+  }
 }
 
 //用來顯示總共要有幾個球數按鈕
@@ -406,13 +380,13 @@ function mainDataRander(vanillaData, nowPeriod) {
 //顯示所有數據統計的邏輯
 function mainStatisticsRander(statistics) {
   //根據資料顯示
-  statistics.forEach((data, i) => {
+  statistics.forEach((data) => {
     let newStatistics = document.createElement("div");
     newStatistics.className = "statisticsBox";
     document.querySelector(".main").appendChild(newStatistics);
     let newStatisticsInfo = `
               <div class="leftBox">
-                <div class="toDataTotalArea">${statisticsName[i]}</div>
+                 <div class="toDataTotalArea">${data.name}</div>
               </div>
               ${ballsStatistics(data)}`;
     newStatistics.innerHTML = newStatisticsInfo;
@@ -421,72 +395,75 @@ function mainStatisticsRander(statistics) {
 
 //處理要顯示幾球的邏輯
 function handleBallsNumberBtn() {
-  const show = document.querySelectorAll("#show");
-  const showBtn = document.querySelectorAll("#showNumber");
-
-  function toggleBallsNumber(i) {
-    const img = show[i].getElementsByTagName("img")[0];
-    if (balls[i] === 1) {
-      balls[i] = 0;
-      img.style.display = "none";
-    } else {
-      balls[i] = 1;
-      img.style.display = "block";
-    }
-  }
-
-  function clearAndRenderData() {
-    clearAll();
-    mainTitle();
-    mainDataRander(vanillaData, nowPeriod);
-    statisticsTitle();
-    mainStatisticsRander(statistics);
-    if (isShowLine) {
-      drawLines();
-    }
-  }
-
+  let show = document.querySelectorAll("#show");
+  let showBtn = document.querySelectorAll("#showNumber");
   for (let i = 0; i < show.length; i++) {
     show[i].addEventListener("click", function () {
+      let img = show[i].getElementsByTagName("img");
       showBtn[i].classList.toggle("active");
-      toggleBallsNumber(i);
-      clearAndRenderData();
+      if (balls[i] === 1) {
+        balls[i] = 0;
+        img[0].style.display = "none";
+      } else {
+        balls[i] = 1;
+        img[0].style.display = "block";
+      }
+      clearAll(); //先清除所有資料
+      mainTitle(); //在抓取一次標題還有所有資料
+      mainDataRander(vanillaData, nowPeriod);
+      statisticsTitle(); //再抓取一次統計資料
+      mainStatisticsRander(statistics);
+      // 如果有要顯示折線圖才畫線
+      if (isShowLine) {
+        drawBrokenLine();
+      }
     });
   }
 }
 
 //畫線的邏輯
-function drawLines() {
-  let canvas = null;
-  let context = null;
-  const main = document.querySelector(".main");
-  const width = main.scrollWidth;
-  const height = main.scrollHeight;
-  const panelTop = main.scrollTop;
+function drawBrokenLine() {
+  let main = document.querySelector(".main");
+  let canvas = document.createElement("canvas");
 
-  canvas = document.createElement("canvas");
+  //抓取畫布所有的屬性
+  let width = main.scrollWidth;
+  let height = main.scrollHeight;
+  //panelLeft設置為0才會使每次球數變更畫布位置正確
+  let panelLeft = 0;
+  let panelTop = main.scrollTop;
+
+  //設置canvas
   canvas.width = width;
   canvas.height = height;
   canvas.style.position = "absolute";
   main.appendChild(canvas);
-  context = canvas.getContext("2d");
-
   canvas.style.top = panelTop + "px";
   canvas.style.left = 0 + "px";
-  context.clearRect(0, 0, canvas.width, canvas.height);
 
   for (let i = 0; i < balls.length; i++) {
-    const line = document.querySelectorAll(`#line-0${i + 1}`);
-    const color = lineColor[i];
+    let line = document.querySelectorAll(`#line-0${i + 1}`);
+    let color = lineColor[i];
 
-    for (let j = 0; j < line.length - 1; j++) {
-      const select1 = line[j];
-      const select2 = line[j + 1];
-      const x1 = select1.offsetLeft + select1.offsetWidth / 2;
-      const y1 = select1.offsetTop + select1.offsetHeight / 2 - panelTop;
-      const x2 = select2.offsetLeft + select2.offsetWidth / 2;
-      const y2 = select2.offsetTop + select2.offsetHeight / 2 - panelTop;
+    // canvas可用性
+    // if (canvas.getContext) {
+    //     console.log("遊覽器支援Canvas");
+    // } else {
+    //     console.log("遊覽器不支援Canvas");
+    // }
 
+    let context = canvas.getContext("2d");
+
+    for (let i = 0; i < line.length - 1; i++) {
+      let select1 = line[i];
+      let select2 = line[i + 1];
+
+      let x1 = select1.offsetLeft - panelLeft + select1.offsetWidth / 2;
+      let y1 = select1.offsetTop - panelTop + select1.offsetHeight / 2;
+      let x2 = select2.offsetLeft - panelLeft + select2.offsetWidth / 2;
+      let y2 = select2.offsetTop - panelTop + select2.offsetHeight / 2;
+
+      // 開始畫線
       context.beginPath();
       context.moveTo(x1, y1);
       context.lineTo(x2, y2);
@@ -508,7 +485,7 @@ function handleClearBtn() {
       img[0].style.display = "none";
       isShowLine = false;
     } else {
-      drawLines();
+      drawBrokenLine();
       img[0].style.display = "block";
       isShowLine = true;
     }
@@ -531,7 +508,7 @@ window.onload = function () {
     handleClearBtn();
     statisticsTitle();
     mainStatisticsRander(statistics);
-    drawLines();
+    drawBrokenLine();
     loadOver();
   });
 };
