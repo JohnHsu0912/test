@@ -147,6 +147,7 @@ function btnChange() {
   }
 }
 
+
 //顯示所有開獎資料的邏輯
 function mainDataRander(vanillaData, nowPeriod) {
   // 重新設置初始值

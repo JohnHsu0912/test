@@ -39,7 +39,7 @@ body {
   color: #3c4858;
 }
 .titleDiv .left {
-  min-height: 77px;
+  min-height: 79px;
   background-color: #bfbfbf;
   display: flex;
 }
@@ -98,7 +98,7 @@ body {
 .leftBox {
   display: flex;
   background-color: #ededed;
-  min-height: 45px;
+  min-height: 48px;
 }
 .leftBox .toDataTotalArea {
   width: 440px;

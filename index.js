@@ -212,7 +212,7 @@ function clearAll() {
 let missBtn = document.querySelector("#missBtn");
 let showMissMap = document.querySelector("#showMissMap");
 missBtn.addEventListener("click", () => {
-  const img = missBtn.getElementsByTagName("img")[0];
+  let img = missBtn.getElementsByTagName("img")[0];
   showMissMap.classList.toggle("active");
   clearAllDataAndTitle();
   isMissMap = !isMissMap;
@@ -315,29 +315,27 @@ function ballsTotal(data) {
 
 //抓取總共要顯示幾顆球與數據統計的邏輯
 function ballsStatistics(data) {
-  let total = data.keys;
-  const result = total.map((num, luckyIndex) => {
-    // 先判斷是否要顯示這顆球
-    if (balls[luckyIndex] === 1) {
-      const down = data[num].map((content) => {
-        return `<span class="number-area">${content}</span>`;
-      });
-      return `<div class="rightBoxContent color-set-backGround-${
-        titleColor[luckyIndex]
-      }">${down.join("")}</div>`;
-    }
-  });
-  return result.join("");
+  return data.keys
+    .map((num, luckyIndex) => {
+      if (balls[luckyIndex] === 1) {
+        const down = data[num]
+          .map((content) => `<span class="number-area">${content}</span>`)
+          .join("");
+        return `<div class="rightBoxContent color-set-backGround-${titleColor[luckyIndex]}">${down}</div>`;
+      }
+      return "";
+    })
+    .join("");
 }
 
 //用來顯示中獎號碼區域
 function ballsLotteryAera(win) {
-  const ballsWin = win.map((num, i) => {
-    return `<span class=${
-      balls[i] === 1 ? "luckyNumber" : "unLuckyNumber"
-    }>${num}</span>`;
-  });
-  return `<div class="toLuckyArea">${ballsWin.join("")}</div>`;
+  let result = "";
+  for (let i = 0; i < balls.length; i++) {
+    const cssClass = balls[i] === 1 ? "luckyNumber" : "unLuckyNumber";
+    result += `<span class="${cssClass}">${win[i]}</span>`;
+  }
+  return `<div class="toLuckyArea">${result}</div>`;
 }
 
 //用來控制顯示期數
@@ -405,18 +403,21 @@ function mainDataRander(vanillaData, nowPeriod) {
 
 //顯示所有數據統計的邏輯
 function mainStatisticsRander(statistics) {
-  //根據資料顯示
-  statistics.forEach((data, i) => {
-    let newStatistics = document.createElement("div");
-    newStatistics.className = "statisticsBox";
-    document.querySelector(".main").appendChild(newStatistics);
-    let newStatisticsInfo = `
-              <div class="leftBox">
-                <div class="toDataTotalArea">${statisticsName[i]}</div>
-              </div>
-              ${ballsStatistics(data)}`;
-    newStatistics.innerHTML = newStatisticsInfo;
-  });
+  const main = document.querySelector(".main");
+  let html = statistics
+    .map(
+      (data, i) => `
+    <div class="statisticsBox">
+      <div class="leftBox">
+        <div class="toDataTotalArea">${statisticsName[i]}</div>
+      </div>
+      ${ballsStatistics(data)}
+    </div>
+  `
+    )
+    .join("");
+
+  main.insertAdjacentHTML("beforeend", html);
 }
 
 //處理要顯示幾球的邏輯
@@ -498,20 +499,18 @@ function drawLines() {
 }
 
 //處理畫線按鈕
-function handleClearBtn() {
+function handleDrawLineBtn() {
   let lineBtn = document.querySelector("#lineBtn");
   let showLine = document.querySelector("#showLine");
   let img = lineBtn.getElementsByTagName("img");
   lineBtn.addEventListener("click", function () {
     if (isShowLine) {
       clearLine();
-      img[0].style.display = "none";
-      isShowLine = false;
     } else {
       drawLines();
-      img[0].style.display = "block";
-      isShowLine = true;
     }
+    img[0].style.display = isShowLine ? "none" : "block";
+    isShowLine = !isShowLine;
     showLine.classList.toggle("active");
   });
 }
@@ -528,7 +527,7 @@ window.onload = function () {
     handleBallsNumberBtn();
     btnChange();
     mainDataRander(vanillaData, nowPeriod);
-    handleClearBtn();
+    handleDrawLineBtn();
     statisticsTitle();
     mainStatisticsRander(statistics);
     drawLines();
