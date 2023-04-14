@@ -1,61 +1,8 @@
 //原本放在index.js裡面 原本的程式碼   目前最新的都用GPT做優化
-import { API_Mindanao_2D } from "./api.js";
+import { API_FULL_Calabarzon_6D } from "./api.js";
 
 //統計資料的假格式
-let statistics = [
-  {
-    keys: ["first", "second", "three"],
-    name: "occurrences",
-    first: [
-      5, 3, 3, 4, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 0, 3, 1, 3, 1, 0, 2, 2,
-      2, 2, 1, 0, 2, 0,
-    ],
-    second: [
-      0, 1, 0, 3, 2, 0, 1, 1, 3, 4, 1, 1, 2, 2, 2, 1, 1, 5, 2, 0, 1, 0, 1, 0, 1,
-      1, 1, 4, 1, 4, 4,
-    ],
-    three: [
-      0, 1, 0, 3, 2, 0, 1, 1, 3, 4, 1, 1, 2, 2, 2, 1, 1, 5, 2, 0, 1, 0, 1, 0, 1,
-      1, 1, 4, 1, 4, 4,
-    ],
-  },
-  {
-    keys: ["first", "second"],
-    name: "maxOmission",
-    first: [
-      23, 22, 23, 16, 29, 28, 37, 44, 47, 26, 38, 25, 45, 46, 32, 36, 40, 50,
-      15, 48, 18, 46, 50, 24, 31, 36, 30, 27, 50, 31, 50,
-    ],
-    second: [
-      50, 40, 50, 20, 31, 50, 26, 26, 25, 16, 43, 36, 29, 21, 33, 32, 44, 25,
-      41, 50, 44, 50, 45, 50, 49, 39, 38, 22, 35, 20, 16,
-    ],
-  },
-  {
-    keys: ["first", "second"],
-    name: "averageOmission",
-    first: [
-      5, 6, 7, 7, 10, 10, 18, 2, 23, 8, 5, 12, 22, 23, 8, 18, 4, 0, 10, 24, 8,
-      1, 0, 13, 5, 12, 13, 11, 0, 16, 0,
-    ],
-    second: [
-      0, 4, 0, 10, 5, 0, 11, 13, 5, 7, 3, 18, 15, 9, 11, 16, 2, 7, 13, 0, 22, 0,
-      2, 0, 24, 19, 5, 8, 17, 5, 7,
-    ],
-  },
-  {
-    keys: ["first", "second"],
-    name: "maxContinuous",
-    first: [
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1,
-      1, 1, 1, 0, 1, 0,
-    ],
-    second: [
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1,
-      1, 1, 1, 0, 1, 0,
-    ],
-  },
-];
+let statistics = [];
 
 //用來設置背景標註的開關
 let ballsBackGroundState = [];
@@ -111,13 +58,14 @@ let lineColor = [
 //先抓取API然後塞進 vanillaData
 async function getApi() {
   try {
-    const res = await fetch(API_Mindanao_2D);
+    const res = await fetch(API_FULL_Calabarzon_6D);
     const data = await res.json();
-    // const { results } = await data[0];
-    // let ball = await results[0]?.keys;
-    // vanillaData = results?.reverse();
-    let ball = await data[0][0].keys;
-    vanillaData = data[0]?.reverse();
+    const { results } = data[0];
+    const { occurrences, maxOmission, averageOmission, maxContinuous } =
+      data[0];
+    statistics = [occurrences, maxOmission, averageOmission, maxContinuous];
+    let ball = await results[0]?.keys;
+    vanillaData = results?.reverse();
     console.log("先發API抓取資料");
     for (let i = 0; i < ball.length; i++) {
       balls.push(1);
@@ -319,7 +267,7 @@ function ballsStatistics(data) {
     .map((num, luckyIndex) => {
       if (balls[luckyIndex] === 1) {
         const down = data[num]
-          .map((content) => `<span class="number-area">${content}</span>`)
+          ?.map((content) => `<span class="number-area">${content}</span>`)
           .join("");
         return `<div class="rightBoxContent color-set-backGround-${titleColor[luckyIndex]}">${down}</div>`;
       }
