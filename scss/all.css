@@ -136,11 +136,11 @@ body {
   width: 28px;
   height: 28px;
   border-radius: 28px;
-  background-color: #C8172B;
+  background-color: #c8172b;
   line-height: 28px;
   text-align: center;
   margin: 0 3px;
-  color: #FFF;
+  color: #fff;
 }
 
 .bodyLuckyNumber {
@@ -151,7 +151,7 @@ body {
   line-height: 28px;
   z-index: 1;
   margin: 10px 1px;
-  color: #FFF;
+  color: #fff;
 }
 
 .unLuckyNumber {
@@ -241,6 +241,10 @@ body {
   display: block;
   margin-left: 3px;
   cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 .active {
@@ -249,27 +253,27 @@ body {
 }
 
 .color-set-one {
-  background-color: #488D1A;
+  background-color: #488d1a;
 }
 
 .color-set-two {
-  background-color: #18827F;
+  background-color: #18827f;
 }
 
 .color-set-three {
-  background-color: #FF5704;
+  background-color: #ff5704;
 }
 
 .color-set-four {
-  background-color: #5D5ADE;
+  background-color: #5d5ade;
 }
 
 .color-set-five {
-  background-color: #A2165B;
+  background-color: #a2165b;
 }
 
 .color-set-six {
-  background-color: #047FE8;
+  background-color: #047fe8;
 }
 
 .color-set-backGround-one {
